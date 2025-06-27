@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Para Você, Meu Amor</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Montserrat:wght@300;400;600&display=swap');
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: linear-gradient(135deg, #f9d976, #f39f86, #d64c1e);
+            color: #3a1a00;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        .polaroid {
+            background: white;
+            padding: 15px 15px 40px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.25);
+            transform: rotate(-2deg);
+            transition: all 0.3s ease;
+            position: relative;
+            cursor: pointer;
+            overflow: hidden;
+        }
+
+        .polaroid:hover {
+            transform: rotate(0deg) scale(1.05);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.35);
+        }
+
+        .polaroid:nth-child(even) {
+            transform: rotate(2deg);
+        }
+
+        .polaroid:nth-child(even):hover {
+            transform: rotate(0deg) scale(1.05);
+        }
+
+        .polaroid img {
+            width: 100%;
+            height: 16rem;
+            object-fit: cover;
+            user-select: none;
+            pointer-events: none;
+        }
+
+        .heart {
+            animation: heartbeat 1.5s infinite;
+        }
+
+        @keyframes heartbeat {
+            0% { transform: scale(1); }
+            25% { transform: scale(1.1); }
+            50% { transform: scale(1); }
+            75% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        .music-player {
+            background: rgba(255,255,255,0.8);
+            backdrop-filter: blur(5px);
+        }
+
+        .letter-paper {
+            background: repeating-linear-gradient(
+                45deg,
+                #fff8f0,
+                #fff8f0 31px,
+                #ffb347 31px,
+                #ffb347 32px
+            );
+            line-height: 32px;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+            color: #4a2c0a;
+        }
+
+        .editable-letter {
+            outline: none;
+            cursor: text;
+            white-space: pre-wrap;
+            min-height: 300px;
+            font-size: 1.1rem;
+            font-family: 'Dancing Script', cursive;
+        }
+
+        .final-message {
+            background: rgba(255 183 71 / 0.7);
+            border-color: #d64c1e;
+            color: #7a2e0e;
+        }
+
+        .final-message .heart {
+            color: #d64c1e;
+        }
+
+        /* Permitir edição em todos elementos que precisam */
+        [contenteditable="true"] {
+            outline: none;
+            cursor: text;
+        }
+
+        /* Botão de salvar */
+        #saveBtn {
+            position: fixed;
+            top: 1rem;
+            right: 1rem;
+            background: #d64c1e;
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 9999px;
+            font-weight: bold;
+            box-shadow: 0 4px 10px rgba(214,76,30,0.7);
+            cursor: pointer;
+            z-index: 100;
+            user-select: none;
+            transition: background-color 0.3s ease;
+        }
+
+        #saveBtn:hover {
+            background: #a73b0f;
+        }
+
+    </style>
+</head>
+<body>
+    <!-- Botão para salvar o arquivo HTML editado -->
+    <button id="saveBtn" title="Salvar página editada">Salvar</button>
+
+    <!-- Music Player -->
+    <audio id="bgMusic" autoplay loop>
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg" />
+        <!-- Substitua pelo link da música Partilhar se desejar -->
+    </audio>
+
+    <div class="fixed bottom-4 right-4 z-50 music-player rounded-full p-3 shadow-lg">
+        <button id="musicToggle" class="text-orange-700 hover:text-orange-900">
+            <i class="fas fa-music text-2xl"></i>
+        </button>
+    </div>
+
+    <div class="container mx-auto px-4 py-8">
+        <header class="text-center mb-12 relative" contenteditable="true" spellcheck="false">
+            <div class="absolute top-0 left-0 w-full flex justify-center pointer-events-none">
+                <div class="heart text-orange-600 text-4xl">♥</div>
+            </div>
+            <h1 class="text-5xl md:text-6xl font-bold text-orange-800 mt-8 mb-4 font-dancing">Para Você, Meu Amor</h1>
+            <p class="text-xl text-amber-700">Para nunca se esquecer do meu amor</p>
+        </header>
+
+        <!-- Frases -->
+        <section class="mb-16" contenteditable="true" spellcheck="false" aria-label="Frases do Pequeno Príncipe">
+            <h2 class="text-3xl font-bold text-center mb-8 text-amber-900 font-dancing">Frases do Pequeno Príncipe</h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="bg-white p-6 rounded-lg shadow-md border-l-4 border-yellow-500 hover:scale-105 transition">
+                    <blockquote class="italic text-lg mb-4">"Foi o tempo que dedicaste à tua rosa que a fez tão importante."</blockquote>
+                    <p class="text-orange-700">— O Pequeno Príncipe</p>
+                </div>
+                <div class="bg-orange-50 p-6 rounded-lg shadow-md border-l-4 border-red-500 hover:scale-105 transition">
+                    <blockquote class="italic text-lg mb-4">"Tu te tornas eternamente responsável por aquilo que cativas."</blockquote>
+                    <p class="text-red-700">— O Pequeno Príncipe</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md border-l-4 border-yellow-600 hover:scale-105 transition">
+                    <blockquote class="italic text-lg mb-4">"O essencial é invisível aos olhos, só se vê bem com o coração."</blockquote>
+                    <p class="text-yellow-700">— O Pequeno Príncipe</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md border-l-4 border-yellow-600 hover:scale-105 transition">
+                    <blockquote class="italic text-lg mb-4">"Se tu vens, por exemplo, às quatro da tarde, desde as três eu começarei a ser feliz."</blockquote>
+                    <p class="text-yellow-700">— O Pequeno Príncipe</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md border-l-4 border-yellow-600 hover:scale-105 transition">
+                    <blockquote class="italic text-lg mb-4">"Amar não é olhar um para o outro, é olhar juntos na mesma direção."</blockquote>
+                    <p class="text-yellow-700">— O Pequeno Príncipe</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md border-l-4 border-yellow-600 hover:scale-105 transition">
+                    <blockquote class="italic text-lg mb-4">"Todas as pessoas grandes foram um dia crianças... mas poucas se lembram disso."</blockquote>
+                    <p class="text-yellow-700">— O Pequeno Príncipe</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Carta -->
+        <section class="mb-16" contenteditable="true" spellcheck="false" aria-label="Carta pessoal">
+            <h2 class="text-3xl font-bold text-center mb-8 text-orange-800 font-dancing">Minha Carta Para Minha Rosa</h2>
+            <div class="max-w-2xl mx-auto">
+                <div class="letter-paper editable-letter">
+Meu amor,
+
+Assim como o Pequeno Príncipe encontrou sua rosa, eu encontrei você. E assim como ele, eu aprendi que o amor não está apenas nas grandes declarações, mas nos pequenos momentos que compartilhamos.
+
+Você se tornou minha rosa única em um jardim de milhares. E eu sou eternamente responsável por você, porque cativou meu coração.
+
+Lembra daquela vez que [insira uma memória especial]? Foi um daqueles momentos em que eu soube que estava olhando para o meu futuro. Cada riso, cada abraço, cada olhar trocado - tudo isso é o que torna a vida tão especial.
+
+Mesmo quando estamos longe, como o principezinho e sua rosa, eu sei que nosso amor permanece. Porque, como diz o livro, "o essencial é invisível aos olhos".
+
+Eu te amo mais do que todas as estrelas que o Pequeno Príncipe visitou.
+
+Para sempre seu,
+
+[Seu Nome]
+                </div>
+            </div>
+        </section>
+
+        <!-- Polaroids (9) -->
+        <section class="mb-16">
+            <h2 class="text-3xl font-bold text-center mb-8 text-amber-900 font-dancing" contenteditable="true" spellcheck="false">Nossos Momentos</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8" id="polaroids-grid">
+                <!-- Polaroids inseridos por JS -->
+            </div>
+        </section>
+
+        <!-- Final -->
+        <section class="text-center mb-16 py-8 px-4 rounded-lg border final-message relative" contenteditable="true" spellcheck="false">
+            <h2 class="text-3xl font-bold mb-4 font-dancing">Obrigada por ser meu principezinho</h2>
+            <p class="text-xl mb-6">Você ilumina minha vida como as estrelas iluminam o céu do Pequeno Príncipe.</p>
+            <div class="flex justify-center space-x-4">
+                <div class="heart text-4xl">❤️</div>
+                <div class="heart text-4xl">❤️</div>
+                <div class="heart text-4xl">❤️</div>
+            </div>
+        </section>
+    </div>
+
+    <template id="polaroid-template">
+        <div class="polaroid" tabindex="0" contenteditable="false">
+            <img src="https://via.placeholder.com/500x300?text=Sua+Foto" alt="Foto personalizada" />
+            <p class="text-center mt-2 font-dancing text-xl" contenteditable="true" spellcheck="false">Legenda da foto</p>
+        </div>
+    </template>
+
+    <script>
+        // Criar as 9 polaroids com legendas editáveis
+        const grid = document.getElementById('polaroids-grid');
+        const template = document.getElementById('polaroid-template').content;
+        for (let i = 1; i <= 9; i++) {
+            const clone = template.cloneNode(true);
+            clone.querySelector("p").textContent = `Nosso momento ${i}`;
+            grid.appendChild(clone);
+        }
+
+        // Música play/pause
+        const music = document.getElementById('bgMusic');
+        const toggleBtn = document.getElementById('musicToggle');
+        toggleBtn.addEventListener('click', () => {
+            if (music.paused) {
+                music.play();
+                toggleBtn.innerHTML = '<i class="fas fa-music text-2xl"></i>';
+            } else {
+                music.pause();
+                toggleBtn.innerHTML = '<i class="fas fa-music-slash text-2xl"></i>';
+            }
+        });
+
+        // Colar imagem nas polaroids
+        document.addEventListener('paste', (event) => {
+            const active = document.activeElement.closest('.polaroid');
+            if (!active) return;
+            const items = (event.clipboardData || event.originalEvent.clipboardData).items;
+            for (const item of items) {
+                if (item.type.indexOf('image') === 0) {
+                    const blob = item.getAsFile();
+                    const URLObj = window.URL || window.webkitURL;
+                    const source = URLObj.createObjectURL(blob);
+                    active.querySelector('img').src = source;
+                    active.querySelector('img').alt = "Imagem colada";
+                    event.preventDefault();
+                    break;
+                }
+            }
+        });
+
+        // Botão para salvar o HTML editado
+        document.getElementById('saveBtn').addEventListener('click', () => {
+            // Remover o botão para não salvar ele no arquivo
+            const btn = document.getElementById('saveBtn');
+            btn.style.display = 'none';
+
+            // Também esconder o player de música fixo para não ficar bugado na reabertura
+            // (opcional)
+            //document.querySelector('.music-player').style.display = 'none';
+
+            // Capturar o HTML completo da página
+            let html = '<!DOCTYPE html>\n' + document.documentElement.outerHTML;
+
+            // Colocar o botão de volta
+            btn.style.display = 'block';
+
+            // Criar um blob para download
+            const blob = new Blob([html], {type: 'text/html'});
+            const a = document.createElement('a');
+            a.href = URL.createObjectURL(blob);
+            a.download = 'presente-romantico-editado.html';
+            a.click();
+            URL.revokeObjectURL(a.href);
+        });
+    </script>
+</body>
+</html>
+Add index.html com o site do presente
